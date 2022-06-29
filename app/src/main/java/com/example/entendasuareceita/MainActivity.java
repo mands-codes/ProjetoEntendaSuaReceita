@@ -74,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference();
 
+        String permissoes[] = {Manifest.permission.SET_ALARM};
+        Permissao.validarPermissoes( permissoes, this, 1 );
 
         btnTraduzir.setOnClickListener(new View.OnClickListener() {
             @Override
