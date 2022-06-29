@@ -25,9 +25,8 @@ public class ListarReceitas extends AppCompatActivity {
 
     private ListView listaReceitas;
     private Button btnNovaReceita;
-
     private List<Receita> receitas = new ArrayList<>();
-    private ArrayAdapter adapter;
+   private ArrayAdapter adapter;
 
     FirebaseDatabase database;
     DatabaseReference reference;
@@ -40,12 +39,13 @@ public class ListarReceitas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_receitas);
 
-        listaReceitas = findViewById(R.id.listView);
-        btnNovaReceita = findViewById(R.id.btnAdicionarReceita);
 
         //Firebase
         database = FirebaseDatabase.getInstance();
         reference = database.getReference();
+
+        listaReceitas = findViewById(R.id.listaCompleta);
+        btnNovaReceita = findViewById(R.id.btnAdicionarReceita);
 
         btnNovaReceita.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,12 +57,13 @@ public class ListarReceitas extends AppCompatActivity {
         });
 
     }
+
     protected void onStart() {
         super.onStart();
         carregarReceitas();
 
         receitas.clear();
-        query = reference.child("livros");
+        query = reference.child("receitas");
 
         childEventListener = new ChildEventListener() {
             @Override
@@ -74,7 +75,7 @@ public class ListarReceitas extends AppCompatActivity {
                 receita.setNomeMedicamento(snapshot.child("nomeMedicamento").getValue(String.class));
                 receita.setQuantidade(snapshot.child("quantidade").getValue(int.class));
                 receita.setComoTomar(snapshot.child("comoTomar").getValue(String.class));
-                receita.setTipo(snapshot.child("tipoPosologia").getValue(TipoPosologia.class));
+                receita.setTipo(snapshot.child("tipo").getValue(TipoPosologia.class));
                 receitas.add(receita);
                 //avisar ao adapter qe a lista foi modificada
                 adapter.notifyDataSetChanged();
@@ -88,7 +89,7 @@ public class ListarReceitas extends AppCompatActivity {
                         r.setNomeMedicamento(snapshot.child("nomeMedicamento").getValue(String.class));
                         r.setQuantidade(snapshot.child("quantidade").getValue(int.class));
                         r.setComoTomar(snapshot.child("comoTomar").getValue(String.class));
-                        r.setTipo(snapshot.child("tipoPosologia").getValue(TipoPosologia.class));
+                        r.setTipo(snapshot.child("tipo").getValue(TipoPosologia.class));
                         break;
                     }
                 }
@@ -126,9 +127,10 @@ public class ListarReceitas extends AppCompatActivity {
         super.onStop();
         query.removeEventListener( childEventListener );
     }
-    private void carregarReceitas(){
+
+   private void carregarReceitas(){
         adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, receitas);
+              android.R.layout.simple_list_item_activated_1, receitas);
         listaReceitas.setAdapter( adapter );
     }
 }

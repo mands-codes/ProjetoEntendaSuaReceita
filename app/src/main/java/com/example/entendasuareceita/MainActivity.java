@@ -2,11 +2,14 @@ package com.example.entendasuareceita;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.AlarmClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -29,16 +32,16 @@ public class MainActivity extends AppCompatActivity {
     private Spinner spTiposPosologia;
     private EditText etMedicamento, etQuantidade, etDurante, etHoras1;
     private Button btnTraduzir, btnSalvar, btnCancelar, btnDefinirAlarme, btnVisualizarAlarme;
-    private TextView txtComoTomar, txtSugestaoHorarios, txtExibirHora, txtHorarioAlarme;
-
+    private TextView txtComoTomar, txtSugestaoHorarios, txtDefinirHorario;
     int hora, minutos;
+
     FirebaseDatabase database;
     DatabaseReference reference;
 
     ChildEventListener childEventListener;
     Query query;
 
-    public TimePickerDialog timePicker;
+    private TimePickerDialog timePicker;
 
 
     @Override
@@ -47,25 +50,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-    spTiposPosologia = findViewById(R.id.spinnerTipos);
+        spTiposPosologia = findViewById(R.id.spinnerTipos);
 
-    etMedicamento = findViewById(R.id.editNomeMedicamento);
-    etQuantidade = findViewById(R.id.editQuantidade);
-    etDurante = findViewById(R.id.editDuracao);
-    etHoras1 = findViewById(R.id.editHora1);
+        etMedicamento = findViewById(R.id.editNomeMedicamento);
+        etQuantidade = findViewById(R.id.editQuantidade);
+        etDurante = findViewById(R.id.editDuracao);
+        etHoras1 = findViewById(R.id.editHora1);
 
-    txtExibirHora = findViewById(R.id.txtHora2);
-    txtComoTomar = findViewById(R.id.txtComoTomar);
-    txtHorarioAlarme = findViewById(R.id.txtHorarioAlarme);
 
-    txtSugestaoHorarios = findViewById(R.id.txtSugestoes);
-    btnTraduzir = findViewById(R.id.btnTraduzir);
-    btnSalvar = findViewById(R.id.btnSalvar);
-    btnCancelar = findViewById(R.id.btnCancelar);
-    btnDefinirAlarme = findViewById(R.id.btnDefinirAlarme);
-    btnVisualizarAlarme = findViewById(R.id.btnAbrirAlarme);
+        txtComoTomar = findViewById(R.id.txtComoTomar);
+        txtDefinirHorario = findViewById(R.id.txtAlarmeDefinido);
 
-    carregarTipos();
+        txtSugestaoHorarios = findViewById(R.id.txtSugestoes);
+        btnTraduzir = findViewById(R.id.btnTraduzir);
+        btnSalvar = findViewById(R.id.btnSalvar);
+        btnCancelar = findViewById(R.id.btnCancelar);
+        btnDefinirAlarme = findViewById(R.id.btnDefinirAlarme);
+        btnVisualizarAlarme = findViewById(R.id.btnAbrirAlarme);
+
+        carregarTipos();
 
         //Firebase
         database = FirebaseDatabase.getInstance();
@@ -73,10 +76,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         btnTraduzir.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            calcularTempos();
-        }
+            @Override
+            public void onClick(View v) {
+                calcularTempos();
+            }
         });
 
         btnSalvar.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +88,13 @@ public class MainActivity extends AppCompatActivity {
                 salvar();
             }
         });
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            botaoCancelar();
 
+            }
+        });
         btnDefinirAlarme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,8 +104,8 @@ public class MainActivity extends AppCompatActivity {
                         hora = hourOfDay;
                         minutos = minute;
                         Calendar calendario = Calendar.getInstance();
-                        calendario.set(0,0,0,hora, minutos);
-                        txtHorarioAlarme.setText(hora+":"+minutos);
+                        calendario.set(0, 0, 0, hora, minutos);
+                        txtDefinirHorario.setText(hora + ":" + minutos);
                     }
                 }, hora, minutos, true);
                 timePicker.setTitle("Selecionar horário");
@@ -104,21 +113,45 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnVisualizarAlarme.setOnClickListener(new View.OnClickListener() {
-            @Override
+       btnVisualizarAlarme.setOnClickListener(new View.OnClickListener() {
+           @Override
             public void onClick(View v) {
-                String texto = txtHorarioAlarme.getText().toString();
-                String mensagem = "Tomar o remedio " +  etMedicamento;
+                String texto = txtDefinirHorario.getText().toString();
+               String mensagem = "Tomar  " +  etMedicamento.getText().toString();
                 if(!texto.isEmpty()){
                     Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
                     intent.putExtra(AlarmClock.EXTRA_HOUR, hora);
                     intent.putExtra(AlarmClock.EXTRA_MINUTES, minutos);
                     intent.putExtra(AlarmClock.EXTRA_MESSAGE, mensagem);
-                    startActivity(intent);
-                }
+                    startActivity( intent );
+
+
+               }
             }
         });
-}
+
+
+    }
+    public void botaoCancelar(){
+        AlertDialog.Builder cancelarAcao = new AlertDialog.Builder(MainActivity.this);
+        cancelarAcao.setTitle("Adicionar Receita");
+        cancelarAcao.setMessage("Você tem certeza que deseja cancelar?");
+        cancelarAcao.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        cancelarAcao.setNeutralButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        cancelarAcao.create();
+        cancelarAcao.show().show();
+    }
     public void calcularTempos(){
 
         int hora = 0;
@@ -168,18 +201,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void salvar() {
+        Log.i("passei","oi");
         Receita receita = new Receita();
 
         String medicamento = etMedicamento.getText().toString();
         int quantidade = Integer.parseInt(etQuantidade.getText().toString());
         String comoTomar = txtComoTomar.getText().toString();
 
-        if (!medicamento.isEmpty() && spTiposPosologia.getSelectedItemPosition() > 0) {
+        Log.i("passei",""+receita.quantidade);
+        if (!medicamento.isEmpty()) {
             receita.setNomeMedicamento(medicamento);
             receita.setTipo((TipoPosologia) spTiposPosologia.getSelectedItem());
             receita.setComoTomar(comoTomar);
             receita.setQuantidade(quantidade);
             ////salvar no firebase
+            Log.i("passei",receita.nomeMedicamento);
             database = FirebaseDatabase.getInstance();
             reference = database.getReference();
             reference.child("receitas").push().setValue(receita);
@@ -188,4 +224,5 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
     }
+
     }

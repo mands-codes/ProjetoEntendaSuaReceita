@@ -3,34 +3,34 @@ package com.example.entendasuareceita;
 public class Receita {
 
     public String id;
-    public String NomeMedicamento;
-    public int Quantidade;
-    public TipoPosologia Tipo;
+    public String nomeMedicamento;
+    public int quantidade;
+    public TipoPosologia tipo;
 
-    public String ComoTomar;
+    public String comoTomar;
 
     public Receita(){
 
     }
 
-    public Receita(String id,String NomeMedicamento, int Quantidade, TipoPosologia Tipo, String ComoTomar){
+    public Receita(String id,String nomeMedicamento, int quantidade, TipoPosologia tipo, String comoTomar){
         this.id = id;
-        this.NomeMedicamento = NomeMedicamento;
-        this.Quantidade = Quantidade;
-        this.Tipo = Tipo;
-        this.ComoTomar = ComoTomar;
+        this.nomeMedicamento = nomeMedicamento;
+        this.quantidade = quantidade;
+        this.tipo = tipo;
+        this.comoTomar = comoTomar;
     }
 
-    public Receita(String NomeMedicamento, int Quantidade, TipoPosologia Tipo, String ComoTomar){
-        this.NomeMedicamento = NomeMedicamento;
-        this.Quantidade = Quantidade;
-        this.Tipo = Tipo;
-       this.ComoTomar = ComoTomar;
+    public Receita(String nomeMedicamento, int quantidade, TipoPosologia tipo, String comoTomar){
+        this.nomeMedicamento = nomeMedicamento;
+        this.quantidade = quantidade;
+        this.tipo = tipo;
+       this.comoTomar = comoTomar;
     }
 
      @Override
      public String toString() {
-     return  NomeMedicamento;
+     return nomeMedicamento + "\n \n " + "Tomar " +  quantidade + " " + tipo.getNome() + "\n"+ comoTomar;
      }
 
     public String getId() {
@@ -41,38 +41,38 @@ public class Receita {
         this.id = id;
     }
 
-    public String getNomeMedicamento() {
-        return NomeMedicamento;
+    public String getnomeMedicamento() {
+        return nomeMedicamento;
     }
 
-    public void setNomeMedicamento(String NomeMedicamento) {
-        this.NomeMedicamento= NomeMedicamento;
+    public void setNomeMedicamento(String nomeMedicamento) {
+        this.nomeMedicamento = nomeMedicamento;
     }
 
 
     public int getQuantidade() {
-        return Quantidade;
+        return quantidade;
     }
 
-    public void setQuantidade(int Quantidade) {
-        this.Quantidade = Quantidade;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
 
     public TipoPosologia getTipo() {
-        return Tipo;
+        return tipo;
     }
 
-    public void setTipo(TipoPosologia Tipo) {
-        this.Tipo = Tipo;
+    public void setTipo(TipoPosologia tipo) {
+        this.tipo = tipo;
     }
 
     public String getComoTomar() {
-        return ComoTomar;
+        return comoTomar;
     }
 
-    public void setComoTomar(String ComoTomar) {
-        this.ComoTomar = ComoTomar;
+    public void setComoTomar(String comoTomar) {
+        this.comoTomar = comoTomar;
     }
 
 

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "850197524093-huvlnh462nofkuli5qfv5jl2t9477u3k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.entendasuareceita",
+            "certificate_hash": "b096cfad83a3a3182097a1fbec4ad6ee7ca0bc65"
+          }
+        },
+        {
           "client_id": "850197524093-b3e79172dkib8mbqq69jh8gguhqprcl0.apps.googleusercontent.com",
           "client_type": 3
         }

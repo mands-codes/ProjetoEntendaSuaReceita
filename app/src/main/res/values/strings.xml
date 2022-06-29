@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EntendaSuaReceita</string>
+    <string name="app_name">Entenda sua Receita</string>
     <string name="title_activity_listagem">Listagem</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

@@ -5,8 +5,9 @@
     android:id="@+id/ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    tools:context=".MainActivity"
+    android:backgroundTint="@color/planoDeFundo"
+    >
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,7 +20,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
+        android:backgroundTint="@color/planoDeFundo"
         tools:ignore="SpeakableTextPresentCheck">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,7 +32,7 @@
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="64dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="@font/roboto"
@@ -37,54 +40,61 @@
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/txtNomeMedicamento"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:text="Nome do Medicamento"
-                android:textSize="16sp" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/txtNomeMedicamento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Nome do Medicamento"
+                    android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/editNomeMedicamento"
+                <EditText
+                    android:id="@+id/editNomeMedicamento"
+                    android:layout_width="404dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:fontFamily="@font/roboto"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <TextView
+                    android:id="@+id/txtExemploDosagem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Exemplo: Losartana 15mg"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtPosologia"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="Posologia"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="@font/roboto"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"
-                tools:ignore="SpeakableTextPresentCheck" />
-
-            <TextView
-                android:id="@+id/txtExemploDosagem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:text="Exemplo: Losartana 15mg"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/txtPosologia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto"
-                android:text="Posologia"
-                android:textAlignment="center"
-                android:textSize="20sp" />
-
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
                 <TextView
                     android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
                     android:fontFamily="@font/roboto"
                     android:text="Quantidade:"
-                    android:textSize="16sp"
-                    app:layout_row="0" />
+                    android:textSize="18sp"
+                     />
 
                 <EditText
                     android:id="@+id/editQuantidade"
@@ -94,37 +104,35 @@
                     android:fontFamily="@font/roboto"
                     android:hint="2"
                     android:inputType="number"
-                    app:layout_column="1"
-                    app:layout_row="0"
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <Spinner
                     android:id="@+id/spinnerTipos"
-                    android:layout_width="224dp"
+                    android:layout_width="183dp"
                     android:layout_height="44dp"
                     android:contentDescription="comprimidos"
                     android:fontFamily="@font/roboto"
                     tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
-            </GridLayout>
+            </LinearLayout>
 
-            <GridLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="53dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/txtDe"
-                    android:layout_width="31dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="173dp"
+                    android:layout_height="39dp"
                     android:fontFamily="@font/roboto"
                     android:paddingHorizontal="5dp"
-                    android:text="De:"
-                    android:textSize="16sp" />
+                    android:text="Intervalo de Horas:"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/editHora1"
-                    android:layout_width="82dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:fontFamily="@font/roboto"
@@ -132,109 +140,87 @@
                     android:inputType="number"
                     app:layout_column="1"
                     app:layout_row="0"
-                    tools:ignore="TouchTargetSizeCheck" />
+                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+            </LinearLayout>
 
-                <TextView
-                    android:id="@+id/txtEm"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:paddingHorizontal="10dp"
-                    android:text="em"
-                    android:textSize="16sp"
-                    app:layout_column="2"
-                    app:layout_row="0" />
-
-                <TextView
-                    android:id="@+id/textView17"
-                    android:layout_width="67dp"
-                    android:layout_height="wrap_content"
-                    android:layout_row="0"
-                    android:layout_column="4"
-                    android:fontFamily="@font/roboto"
-                    android:paddingHorizontal="10dp"
-                    android:text="horas."
-                    android:textSize="16sp"
-                    app:layout_column="4"
-                    app:layout_row="0" />
-
-                <TextView
-                    android:id="@+id/txtHora2"
-                    android:layout_width="77dp"
-                    android:layout_height="38dp"
-                    android:fontFamily="@font/roboto"
-                    app:layout_column="3"
-                    app:layout_row="0" />
-
-            </GridLayout>
-
-            <GridLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="59dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
                     android:fontFamily="@font/roboto"
-                    android:text="Durante:"
-                    android:textSize="16sp"
-                    app:layout_column="0"
-                    app:layout_row="0" />
+                    android:text="Duração do Tratamento:"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/editDuracao"
-                    android:layout_width="wrap_content"
+                    android:layout_width="195dp"
                     android:layout_height="match_parent"
                     android:ems="10"
                     android:fontFamily="@font/roboto"
                     android:hint="20 dias"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
-                    app:layout_column="1"
-                    app:layout_row="0" />
+                    android:textColorHint="#757575" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/btnTraduzir"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
+                    android:layout_width="193dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="208dp"
                     android:backgroundTint="@color/primary"
                     android:fontFamily="@font/roboto"
-                    android:text="Traduzir"
-                    app:layout_column="2"
-                    app:layout_row="0" />
+                    android:text="Converter"
+                    tools:ignore="TextContrastCheck" />
+            </LinearLayout>
 
-            </GridLayout>
-
-            <TextView
-                android:id="@+id/textView2"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:text="Como tomar este medicamento:"
-                android:textSize="16sp" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtComoTomar"
-                android:layout_width="match_parent"
-                android:layout_height="85dp"
-                android:fontFamily="@font/roboto"
-                android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Como tomar este medicamento:"
+                    android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/textView23"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:text="Sugestões de Horário"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/txtComoTomar"
+                    android:layout_width="377dp"
+                    android:layout_height="85dp"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/txtSugestoes"
-                android:layout_width="match_parent"
-                android:layout_height="101dp"
-                android:fontFamily="@font/roboto"
-                android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Sugestões de Horário"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/txtSugestoes"
+                    android:layout_width="match_parent"
+                    android:layout_height="101dp"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -243,52 +229,76 @@
 
                 <Button
                     android:id="@+id/btnDefinirAlarme"
-                    android:layout_width="wrap_content"
+                    android:layout_width="175dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="208dp"
                     android:text="Definir Alarme" />
 
-                <TextView
-                    android:id="@+id/txtHorarioAlarme"
-                    android:layout_width="193dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btnAbrirAlarme"
-                android:layout_width="208dp"
-                android:layout_height="wrap_content"
-                android:text="Visualizar Alarme" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Alarme definido para:"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/txtAlarmeDefinido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                     />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnAbrirAlarme"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="208dp"
+                    android:text="Abrir Alarme" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btnSalvar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="@color/success"
+                    android:text="Salvar" />
+
+                <Button
+                    android:id="@+id/btnCancelar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/danger"
+                    android:layout_weight="1"
+                    android:text="Cancelar" />
+            </LinearLayout>
+
 
         </LinearLayout>
+
     </ScrollView>
 
-    <LinearLayout
-        android:layout_width="429dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/btnSalvar"
-            android:layout_width="184dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="10dp"
-            android:backgroundTint="@color/success"
-            android:fontFamily="@font/roboto"
-            android:text="Salvar" />
-
-        <Button
-            android:id="@+id/btnCancelar"
-            android:layout_width="184dp"
-            android:layout_height="40dp"
-            android:backgroundTint="@color/danger"
-            android:fontFamily="@font/roboto"
-            android:text="Cancelar" />
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
